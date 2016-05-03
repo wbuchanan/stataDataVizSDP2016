@@ -2,7 +2,17 @@
 This repository contains materials for the _Becoming a Better Data Communicator: Stata Data Visualization_ session at the [Strategic Data Project's 2016 Spring Convening](http://sdp.cepr.harvard.edu/event/beyond-numbers-convening).  Additionally, if there are resources you think others may find helpful, please feel free to share them here as well via `pull` requests.  
 
 # Prereadings
-[brewscheme](http://wbuchanan.github.io/brewscheme/brewscheme.pdf) - Despite the overall length, the overwhelming majority of the article consists of different examples of how to use different commands in the `brewscheme` toolkit.  
+[brewscheme](http://wbuchanan.github.io/brewscheme/brewscheme.pdf) 
+
+# Prework
+Prior to attending the session, participants should install the `brewscheme` package.  To make sure you have the most recent version of the program you can install it using:
+
+```Stata
+net install brewscheme, from("http://wbuchanan.github.io/brewscheme/")
+```
+
+
+
 
 # Helpful/Useful user written programs
 - [brewscheme](https://github.com/wbuchanan/brewscheme)
@@ -29,7 +39,7 @@ This repository contains materials for the _Becoming a Better Data Communicator:
 - [Communicating Data](http://communicatingdata.org)
 - [Effectively Communicating Numbers](https://www.perceptualedge.com/articles/Whitepapers/Communicating_Numbers.pdf)
 - [Graphs in Statistical Analysis](http://www.sjsu.edu/faculty/gerstman/StatPrimer/anscombe1973.pdf)
-
+- [ffmpeg](https://ffmpeg.org/) <- This is a program you would need to create motion-based visualizations
 
 
 
