@@ -16,21 +16,19 @@ net install jsonio, from("http://wbuchanan.github.io/StataJSON/")
 There are some data used in some StataPress books that should look familiar and provide pretty good starting points for some visualization techniques.  You can install them using:
 
 ```Stata
+// Tells Stata where to save/store ancillary files with packages
 net set other `"`c(sysdir_personal)'"'
-net inst ivrm, from("http://www.stata-press.com/data/ivrm/")
-net get ivrm
+
+// Installs the package for Interpretting and Visualizing Regression Models 
+net inst ivrm, from("http://www.stata-press.com/data/ivrm/") replace
+
+// Gets the supplementary/ancillary files
+net get ivrm, replace
+
+// Installs the package for A Visual Guide to Stata Graphics (3rd Ed)
+net inst vgsg3, from("http://www.stata-press.com/data/vgsg3/") replace
+
+// Gets the supplementary/ancillary files
+net get vgsg3, replace
 ```
-
-You can also access examples of Testing/Assessment data from:
-
-```Stata
-copy "http://itemanalysis.com/data/IRT-short-course-example-data.zip" irtShortCourse.zip
-copy "http://itemanalysis.com/data/jmetrik-data.zip" jMetrikExamples.zip
-unzipfile irtShortCourse.zip, replace
-unzipfile jMetrikExamples.zip, replace
-```
-
-
-
-
 
