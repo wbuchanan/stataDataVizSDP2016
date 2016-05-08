@@ -12,23 +12,34 @@ net install brewscheme, from("http://wbuchanan.github.io/brewscheme/")
 net install jsonio, from("http://wbuchanan.github.io/StataJSON/")
 ```
 
-## Some Example data sets
-There are some data used in some StataPress books that should look familiar and provide pretty good starting points for some visualization techniques.  You can install them using:
+# Data used for graph examples - Mississippi Statewide Accountability System Results
+Since these data are already vetted and contain variables from each of the measurement scales, this would be a good data set to work with for examples.  
+
+There is a Stata executable `msas.ado` in the exampleCode subdirectory.  I'll 
+create a Stata package that can be installed as well, but you can download/copy 
+that file then use:
 
 ```Stata
-// Tells Stata where to save/store ancillary files with packages
-net set other `"`c(sysdir_personal)'"'
-
-// Installs the package for Interpretting and Visualizing Regression Models 
-net inst ivrm, from("http://www.stata-press.com/data/ivrm/") replace
-
-// Gets the supplementary/ancillary files
-net get ivrm, replace
-
-// Installs the package for A Visual Guide to Stata Graphics (3rd Ed)
-net inst vgsg3, from("http://www.stata-press.com/data/vgsg3/") replace
-
-// Gets the supplementary/ancillary files
-net get vgsg3, replace
+adopath ++ /Where/You/Saved/msas.ado
 ```
+
+To be able to the program from Stata.  It will download a copy of the data mentioned above and has options to save pre-cleaned Stata formatted files or to load/clean the file from disk:
+
+## msas.ado Examples
+
+```Stata
+// Download the data and save copies of the performance and participation data to disk
+msas, perf(exdata/performance.dta) partic(exdata/participation.dta) dlf(msas.xlsx)
+
+// Can load the Stata file normally, or you can load it by processing the MS Excel file
+// This would load the performance (e.g., assessment and graduation rate) data
+msas using msas.xlsx, perf
+
+// This would load the participation rate data
+msas using msas.xlsx, partic
+
+```
+
+
+
 
