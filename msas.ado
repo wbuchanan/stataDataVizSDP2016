@@ -40,8 +40,15 @@ prog def msas
 	if `"`dlfile'"' != "" & `"`using'"' == "" {								    
 		
 		// Create a reference for the location of the file 
-		loc thefile `: subinstr loc dlfile ".xlsx" "", all'.xlsx
-
+		loc thefile `: subinstr loc dlfile ".xlsx" "", all'
+		loc thefile `: subinstr loc dlfile ".xls" "", all'.xlsx
+		
+		// Check to see if file exists
+		cap confirm new file `"`thefile'"'
+		
+		// If the file exists, it will be deleted first
+		if _rc != 0 erase `"`thefile'"'
+		
 		// Download the file and save to disk
 		copy `"`root'`flink'"' `"`thefile'"'
 		
@@ -140,7 +147,7 @@ prog def particdata
 		la var partic "Participation Rate"
 		
 		// Save a tempfile
-		save `sub`i''.dta, replace
+		qui: save `sub`i''.dta, replace
 		
 	} // End Loop over subject areas/sheets
 	
@@ -337,7 +344,7 @@ prog def perfdata
 	qui: replace distnm = proper(distnm)
 
 	// Saves the data to disk if option is specified
-	if `"`save'"' != "" save `"`save'"', replace
+	if `"`save'"' != "" qui: save `"`save'"', replace
 	
 // End sub routine for performance data
 end 

@@ -1,0 +1,24 @@
+d 'SDP2016': Package for the Becoming A Better Data Communicator: Stata Data 
+d Visualization session
+d
+d Contains examples and materials from the Becoming A Better Data Communicator: 
+d Stata Data Visualization session of the Strategic Data Project's 2016 
+d convening.
+d
+d KW: SDP
+d KW: Data Visualization
+d KW: Stata
+d
+d Requires: Stata version 13
+d
+d Distribution-Date: 20160509
+d
+d Author: Billy Buchanan 
+d		  Data Scientist
+d		  Office of Research, Evaluation, Assessment, and Accountability
+d		  Minneapolis Public Schools
+d Support: email William [dot] Buchanan @t mpls [dot] k12 [dot] mn [dot] us
+d
+f msas.ado
+f msas.sthlp
+f exampleCode/anscombesQuartet.do
