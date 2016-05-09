@@ -13,19 +13,21 @@ net install jsonio, from("http://wbuchanan.github.io/StataJSON/")
 ```
 
 # Data used for graph examples - Mississippi Statewide Accountability System Results
-Since these data are already vetted and contain variables from each of the measurement scales, this would be a good data set to work with for examples.  
-
-There is a Stata executable `msas.ado` in the exampleCode subdirectory.  I'll 
-create a Stata package that can be installed as well, but you can download/copy 
-that file then use:
 
 ```Stata
-adopath ++ /Where/You/Saved/msas.ado
+net from "http://wbuchanan.github.io/stataDataVizSDP2016/"
+net inst sdp2016, replace
+net get sdp2016, replace
 ```
 
-To be able to the program from Stata.  It will download a copy of the data mentioned above and has options to save pre-cleaned Stata formatted files or to load/clean the file from disk:
 
 ## msas.ado Examples
+You can view similar examples and additional details about this convenience program using:
+
+```Stata
+help msas
+```
+
 
 ```Stata
 // Download the data and save copies of the performance and participation data to disk
