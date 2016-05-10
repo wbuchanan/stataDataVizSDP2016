@@ -11,7 +11,7 @@ d KW: Stata
 d
 d Requires: Stata version 13
 d
-d Distribution-Date: 20160509
+d Distribution-Date: 20160510
 d
 d Author: Billy Buchanan 
 d		  Data Scientist
@@ -22,3 +22,5 @@ d
 f msas.ado
 f msas.sthlp
 f exampleCode/anscombesQuartet.do
+f exampleCode/brewschemeExample.do
+f exampleCode/marginsplotExample.do
