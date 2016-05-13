@@ -10,9 +10,9 @@ brewscheme, scheme(sdp2016a) allsty(category10) allc(10) allsat(60)
 // for only those types of graphs.  We'll assume that bar graphs are used for 
 // ordinal scale data, pie graphs for nominal scale data, and individual lines 
 // would be used for different dimensions of a single measure/fact
-brewscheme, scheme(sdp2016b) piesty(spectral) piec(5) barsty(blues) barc(8)  ///   
-linesty(category10) linec(10) somesty(oranges) somec(6) 					 ///   
-symbols(circle diamond plus square triangle X)
+brewscheme, scheme(sdp2016b) piesty(accent) piec(5) barsty(blues) barc(8)  	 ///   
+linesty(category10) linec(10) somesty(oranges) somec(6) scatsty(set1)		 ///   
+scatc(9) symbols(circle diamond plus square triangle)
 
 // If, however, your organization has style guides that require graph legends
 // to appear in the right margin of a graph, we can easily create variants of 
@@ -26,5 +26,7 @@ graphsi("x 5.5" "y 4")
 brewscheme, scheme(sdp2016a2) allsty(category10) allc(10) allsat(60) 		 ///   
 themef(sdp2016theme)
 
-brewscheme, scheme(sdp2016b2) piesty(spectral) piec(5) barsty(blues) barc(8) ///   
-linesty(category10) linec(10) somesty(oranges) somec(6) themef(sdp2016theme)
+brewscheme, scheme(sdp2016b2) piesty(accent) piec(5) barsty(blues) barc(8) ///   
+linesty(category10) linec(10) somesty(oranges) somec(6) themef(sdp2016theme) ///  
+scatsty(set1) scatc(9) symbols(circle diamond plus square triangle)
+

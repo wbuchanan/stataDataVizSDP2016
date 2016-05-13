@@ -168,6 +168,10 @@ prog def particdata
 	// Make the region indicator
 	qui: mkregion
 	
+	forv i = 1/3 {
+		qui: erase `sub`i''.dta
+	}	
+	
 	// Check for save option
 	if `"`save'"' != "" qui: save `"`save'"', replace
 	
@@ -354,6 +358,10 @@ prog def perfdata
 	
 	// Make the region indicator
 	qui: mkregion
+	
+	foreach v in schperf distgrad schgrad {
+		qui: erase ``v''.dta
+	}
 
 	// Saves the data to disk if option is specified
 	if `"`save'"' != "" qui: save `"`save'"', replace
