@@ -46,6 +46,21 @@ msas using msas.xlsx, partic
 
 ```
 
+## irtsim.ado
+The workshop package also includes a small/simple simulation tool to generate item responses in order to look at more types of data.  You can use:
 
+```Stata
+help irtsim
+```
+
+To view the helpfile.  The example data generated for the workshop slides was created with:
+
+```Stata
+irtsim, th(0 1.5) nob(5000) discrim(1) diff(-2(0.5)2) scalef(1) pseudog(0)
+```
+
+# Participant driven programs/examples
+
+## distrograph.ado
 
 

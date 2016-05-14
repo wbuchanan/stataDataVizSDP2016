@@ -17,7 +17,7 @@ real matrix irtBinProb(real scalar mutheta, real scalar sigtheta, 			 ///
 	if (rows(beta) == 1 & cols(beta) == 1 & !missing(items)) {
 	
 		// Create a row vector with random values in [0, 1] for alpha
-		beta = J(1, items, runiform(1, 1, 0, 1))
+		beta = J(1, items, runiform(1, 1))
 		
 	} // End IF Block 
 	

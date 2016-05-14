@@ -1,4 +1,7 @@
 *.xlsx
 *.xls
 exdata/*
+*.json
+
+
 

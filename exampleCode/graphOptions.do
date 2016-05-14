@@ -38,6 +38,8 @@ ylab(#11, angle(0) nogrid) xlab(#10) ymti(0(1)100) xmti(0(1)100) mc(blue))
 // Export copy of graph to disk
 qui: gr export exampleGraphs/scatterIter4.pdf, as(pdf) replace
 
+discard
+
 // 5. Color contrast is good, but overall could be better to tell the story of 1 school
 tw (scatter rlagrol rlapro if schnm != "District Level" & distnm != "Desoto Co", mc(orange) msize(small) mlc(black) mlw(vthin)) /// 
 (scatter rlagrol rlapro if !inlist(schnm, "District Level", "Olive Branch MS") ///
@@ -83,6 +85,8 @@ graphr(ic(white) fc(white) lc(white)) plotr(ic(white) fc(white) lc(white)))
 // Export copy of graph to disk
 qui: gr export exampleGraphs/scatterIter8.pdf, as(pdf) replace
 
+discard 
+
 /* 
 From above we can see all the iterations/effort that went into creating this 
 type of graph in a format where it is ready to be used/useful.  
@@ -125,6 +129,8 @@ legend(order(3 4 5) label(3 "All Other Schools") label(4 "Desoto County") label(
 
 // Export to file
 qui: gr export exampleGraphs/scatterBrewproof.pdf, as(pdf) replace
+
+discard
 
 // Bad colors in previous example, but since creating schemes is so fast and we 
 // have a second scheme we can look at the other scheme we created

@@ -1,3 +1,18 @@
+/*******************************************************************************
+*                                                                              *
+* Description -                                                                *
+*       Wrapper around Mata code used to simulate item response data for SDP   *
+*       convening session.                                                     *
+*                                                                              *
+* Returns - Copies of the matrices of probabilities of a keyed response and    *
+*           the matrix containing theta, sum score, and keyed responses.       *
+*                                                                              *
+*******************************************************************************/
+
+*! irtsim
+*! 13may2016
+*! v 0.0.1
+
 // Defines program to do quick simulation of IRT data for visualization purposes
 cap prog drop irtsim
 
@@ -5,7 +20,7 @@ cap prog drop irtsim
 prog def irtsim, rclass
 
 	// Minimum version of Stata required
-	version 13.1
+	version 12
 	
 	// Defines syntax for calling/using program
 	syntax, THeta(numlist min=2 max=2) NOBservations(real) 					 ///   

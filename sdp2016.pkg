@@ -24,8 +24,11 @@ f msas.sthlp
 f irtsim.ado
 f irtsim.sthlp
 f irtSim.mata
+f distrograph.ado
+f distrograph.sthlp
 f exampleCode/anscombesQuartet.do
 f exampleCode/brewschemeExamples.do
 f exampleCode/marginsplotExample.do
 f exampleCode/brewmetaView.do
 f exampleCode/itemResponses.do
+f exampleCode/extendingCommands.do

@@ -25,7 +25,7 @@ cap prog drop msas
 prog def msas
 
 	// Define the minimum version of Stata needed to execute the program
-	version 13
+	version 12
 	
 	// Defines syntax for calling the program w/o optional arg for performance 
 	// or participation, will just load the data, w/optional args will save the 
@@ -41,7 +41,7 @@ prog def msas
 		
 		// Create a reference for the location of the file 
 		loc thefile `: subinstr loc dlfile ".xlsx" "", all'
-		loc thefile `: subinstr loc dlfile ".xls" "", all'
+		loc thefile `: subinstr loc thefile ".xls" "", all'
 		loc thefile `thefile'.xlsx
 		
 		// Check to see if file exists
@@ -92,7 +92,7 @@ cap prog drop particdata
 prog def particdata
 
 	// Version required
-	version 13.1
+	version 12
 	
 	// Defines syntax used to call subroutine
 	syntax using , [ SAve(string asis) ]
@@ -185,7 +185,7 @@ cap prog drop perfdata
 prog def perfdata
 
 	// Version required
-	version 13.1
+	version 12
 	
 	// Defines syntax used to call subroutine
 	syntax using , [ SAve(string asis) ]
@@ -376,7 +376,7 @@ cap prog drop unmask
 prog def unmask
 
 	// Version of Stata required
-	version 13.1
+	version 12
 	
 	// Get the list of all variables in the data set
 	qui: ds, has(type string)
@@ -409,7 +409,7 @@ cap prog drop stddistnm
 prog def stddistnm
 
 	// Version of Stata required/ how source will be interpreted
-	version 13.1
+	version 12
 	
 	// Standardize district names by making them all lower case
 	qui: replace distnm = lower(distnm)
@@ -432,7 +432,7 @@ cap prog drop stdschnm
 prog def stdschnm
 
 	// Version of Stata required
-	version 13.1
+	version 12
 
 	// Makes School names lower cased
 	qui: replace schnm = lower(schnm)
@@ -492,7 +492,7 @@ cap prog drop mkregion
 prog def mkregion
 
 	// Defines minimum version of Stata required
-	version 13.1
+	version 12
 	
 	// Sets up regional indicators for use in the graph examples
 	qui: g byte region = 1 if inlist(distnm, "Attala Co", "Benoit", "Canton", ///   
