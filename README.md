@@ -62,5 +62,17 @@ irtsim, th(0 1.5) nob(5000) discrim(1) diff(-2(0.5)2) scalef(1) pseudog(0)
 # Participant driven programs/examples
 
 ## distrograph.ado
+This is essentially a wrapper around the histogram command.  The difference is  a single option `reflines` that accepts a number list.  The numbers passed to this parameter are used to create reference lines based on standard deviations from the mean.
 
+```Stata
+// Load the performance data
+msas using msas.xlsx, perf
+
+// Create a distribution plot of graduation rates with the references mentioned 
+// in the request above:
+distrograph gradrate if schnm != "District Level", reflin(-2 -1 1 2)
+
+// Like the other graphs, we can also pass a scheme file to the command
+distrograph gradrate if schnm != "District Level", reflin(-2 -1 1 2) scheme(sdp2016a)
+```
 

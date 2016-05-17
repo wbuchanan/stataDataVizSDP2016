@@ -162,3 +162,28 @@ blw(vthick) m(medium) justification(center) alignment(middle) )
 
 // Save the example
 gr export exampleGraphs/graphAllRegions.pdf, as(pdf) replace
+
+// Shows all of the major text options
+tw scatter y x, mc(white) ti("This is the main title", c(black))			 ///   
+subti("And this is a subtitle", nobox) note("This is a note")				 ///   
+caption("This is a caption") t1title("This is a t1title")					 ///   
+t2title("This is a t2title") b1title("This is a b1title")					 ///   
+b2title("This is a b2title") l1title("This is a l1title")					 ///   
+l2title("This is a l2title") r1title("This is a r1title")					 ///   
+r2title("This is a r2title") yti("This is the y-axis title")				 /// 
+xti("And the x-axis title") ylab(none, nogrid) xlab(none)					 ///   
+by(group, ti("This is a by-graph Title", c(black))  						 ///   
+subti("This is a by-graph Sub-title")										 ///   
+note("This is a by-graph note")  											 ///   
+caption("This is a by-graph caption")										 ///   
+t1title("This is a by-graph t1title") 										 ///   
+t2title("This is a by-graph t2title") 										 ///    
+b1title("This is a by-graph b1title") 										 ///    
+b2title("This is a by-graph b2title") 										 ///    
+l1title("This is a by-graph l1title") 										 ///    
+l2title("This is a by-graph l2title") 										 ///    
+r1title("This is a by-graph r1title") 										 ///    
+r2title("This is a by-graph r2title") graphr(c(white)) plotr(c(white)))
+
+// Save the example
+gr export exampleGraphs/byGraphAnatomy1.pdf, as(pdf) replace

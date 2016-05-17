@@ -26,7 +26,7 @@ prog def irtsim, rclass
 	syntax, THeta(numlist min=2 max=2) NOBservations(real) 					 ///   
 			DIFFiculty(numlist min = 1) [ DISCRIMination(numlist min = 1)	 ///   
 			PSEUDOGuessing(numlist min = 1) NITems(real -1) 				 ///   
-			SCALEFactor(real -1.701) ]
+			SCALEFactor(real -1.701) DEVmode ]
 			
 	// Clears any existing returned results		
 	ret clear		
@@ -41,12 +41,17 @@ prog def irtsim, rclass
 	cap mata: mata drop irtBinProb()
 	cap mata: mata drop irtBinKey()
 	
-	// Locate and run the Mata source
-	// cap findfile irtSim.mata
-	// cap run `"`r(fn)'"'
+	// If development mode not triggered will search for the mata file on the path
+	if `"`devmode'"' == "" {
+	
+		// Locate and run the Mata source
+		cap findfile irtSim.mata
+		cap run `"`r(fn)'"'
+	
+	} // End IF Block for development mode
 	
 	// For local development only
-	cap run ./irtSim.mata
+	else cap run ./irtSim.mata
 	
 	// If the number of items is set at the default count the number of alpha 
 	// parameter values
