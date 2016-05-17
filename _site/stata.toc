@@ -1,0 +1,5 @@
+*! TOC File
+v 3
+d Becoming A Better Data Communicator: Stata Data Visualization session
+
+p sdp2016 Package with materials for 2016 SDP Convening Session
