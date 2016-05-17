@@ -70,6 +70,7 @@ plotr(sty(background)) scheme(s1mono) msym(o) mc(black) xti("") 			 ///
 by(figures, note(" ") legend(off) ti("Anscombe's (1973) Quartet", c(black) 	 ///   
 size(large) span)) xsize(9) ysize(6.5) name(anscombesQuartet, replace)
 
-gr export ~/Desktop/Programs/StataPrograms/s/sdp2016/exampleGraphs/anscombesQuartet.eps, as(eps) replace
+// Export graph
+gr export exampleGraphs/anscombesQuartet.pdf, as(pdf) replace
 
 

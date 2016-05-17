@@ -25,7 +25,7 @@ cap prog drop msas
 prog def msas
 
 	// Define the minimum version of Stata needed to execute the program
-	version 13
+	version 12
 	
 	// Defines syntax for calling the program w/o optional arg for performance 
 	// or participation, will just load the data, w/optional args will save the 
@@ -41,7 +41,8 @@ prog def msas
 		
 		// Create a reference for the location of the file 
 		loc thefile `: subinstr loc dlfile ".xlsx" "", all'
-		loc thefile `: subinstr loc dlfile ".xls" "", all'.xlsx
+		loc thefile `: subinstr loc thefile ".xls" "", all'
+		loc thefile `thefile'.xlsx
 		
 		// Check to see if file exists
 		cap confirm new file `"`thefile'"'
@@ -91,7 +92,7 @@ cap prog drop particdata
 prog def particdata
 
 	// Version required
-	version 13.1
+	version 12
 	
 	// Defines syntax used to call subroutine
 	syntax using , [ SAve(string asis) ]
@@ -164,6 +165,13 @@ prog def particdata
 	// Sort the data by district, subgroup, and subject area
 	qui: sort distnm amo sub
 	
+	// Make the region indicator
+	qui: mkregion
+	
+	forv i = 1/3 {
+		qui: erase `sub`i''.dta
+	}	
+	
 	// Check for save option
 	if `"`save'"' != "" qui: save `"`save'"', replace
 	
@@ -177,7 +185,7 @@ cap prog drop perfdata
 prog def perfdata
 
 	// Version required
-	version 13.1
+	version 12
 	
 	// Defines syntax used to call subroutine
 	syntax using , [ SAve(string asis) ]
@@ -268,7 +276,7 @@ prog def perfdata
 		stdschnm
 
 		// Append the district level graduation rates to the file
-		append using `distgrad'.dta
+		qui: append using `distgrad'.dta
 		
 		// Save in a temp file
 		qui: save `schgrad'.dta, replace
@@ -277,10 +285,10 @@ prog def perfdata
 	restore
 
 	// Union the school performance data
-	append using `schperf'.dta
+	qui: append using `schperf'.dta
 
 	// Join the graduation rate data
-	merge 1:1 distnm schnm using `schgrad'.dta
+	qui: merge 1:1 distnm schnm using `schgrad'.dta, nogen
 
 	// Calls subroutine to recode data to numeric values
 	unmask
@@ -297,7 +305,7 @@ prog def perfdata
 					.s "< 10 Students" 1 "F" 2 "D" 3 "C" 4 "B" 5 "A"
 
 	// Recast the grade variable to a numeric type
-	destring offgrade, replace
+	qui: destring offgrade, replace
 
 	// Then apply the value labels
 	la val offgrade offgrade
@@ -326,7 +334,7 @@ prog def perfdata
 	the missing values verbatim.  Without using the cond() function, the missing 
 	values would be coded as system missing values in the new variable.
 	*/
-	g offgraderank = cond(!mi(offgrade), 6 - offgrade, offgrade)
+	qui: g offgraderank = cond(!mi(offgrade), 6 - offgrade, offgrade)
 
 	// Copy the value label for the rank order variable
 	la copy offgrade offgraderank
@@ -342,6 +350,18 @@ prog def perfdata
 	
 	// Make the district names proper cased
 	qui: replace distnm = proper(distnm)
+	
+	// Adjust the science and history data if needed
+	qui: replace scipro = scipro * 2 if !mi(hispro)
+	qui: replace hispro = . if hispro == 50
+	qui: replace hispro = 2 * hispro
+	
+	// Make the region indicator
+	qui: mkregion
+	
+	foreach v in schperf distgrad schgrad {
+		qui: erase ``v''.dta
+	}
 
 	// Saves the data to disk if option is specified
 	if `"`save'"' != "" qui: save `"`save'"', replace
@@ -356,7 +376,7 @@ cap prog drop unmask
 prog def unmask
 
 	// Version of Stata required
-	version 13.1
+	version 12
 	
 	// Get the list of all variables in the data set
 	qui: ds, has(type string)
@@ -369,8 +389,9 @@ prog def unmask
 		// Replace the P values (Pending) with the .p extended missing value
 		// Replace the E values (Excellence for All Waiver Exemption) with .e 
 		// Replace the <10 Students with the .s extended missing value
-		qui: replace `v' = cond(`v' == "N/A", ".n", cond(`v' == "P", ".p", 	 	 ///   
-						   cond(`v' == "E", ".e", cond(`v' == "<10 Students", ".s", `v'))))
+		qui: replace `v' = cond(`v' == "N/A", ".n", cond(`v' == "P", ".p", 	 ///   
+						   cond(`v' == "E", ".e",							 ///   
+						   cond(inlist(`v', "<10 Students", "< 10"), ".s", `v'))))
 
 		// Recast the data to numeric types without information loss
 		qui: destring `v', replace
@@ -388,7 +409,7 @@ cap prog drop stddistnm
 prog def stddistnm
 
 	// Version of Stata required/ how source will be interpreted
-	version 13.1
+	version 12
 	
 	// Standardize district names by making them all lower case
 	qui: replace distnm = lower(distnm)
@@ -411,7 +432,7 @@ cap prog drop stdschnm
 prog def stdschnm
 
 	// Version of Stata required
-	version 13.1
+	version 12
 
 	// Makes School names lower cased
 	qui: replace schnm = lower(schnm)
@@ -464,3 +485,70 @@ prog def stdschnm
 // End of sub routine
 end
 
+// Drops subroutine from memory if already loaded
+cap prog drop mkregion
+
+// Defines subroutine
+prog def mkregion
+
+	// Defines minimum version of Stata required
+	version 12
+	
+	// Sets up regional indicators for use in the graph examples
+	qui: g byte region = 1 if inlist(distnm, "Attala Co", "Benoit", "Canton", ///   
+	"Carroll County", "Clinton", "Columbus") | inlist(distnm, "Durant", 	 ///   
+	"East Jasper", "Enterprise", "Forest", "Hinds Co", "Hinds Co Ahs", 		 ///   
+	"Holmes Co") | inlist(distnm, "Jackson", "Kemper Co", "Kosciusko", 		 ///   
+	"Lauderdale Co", "Leake Co", "Louisville", "Lowndes Co") | inlist(distnm, ///   
+	"Madison Co", "Meridian", "Montgomery Co", "Mound Bayou", "Neshoba County", ///   
+	"Newton") | inlist(distnm, "Newton County", "Noxubee County", 			 ///   
+	"Oktibbeha County", "Pearl", "Philadelphia", "Rankin Co") | inlist(distnm, ///   
+	"Scott Co", "Shaw", "Simpson Co", "Smith Co", "Starkville", "Union Co",  ///   
+	"West Jasper", "Winona")
+
+	qui: replace region = 2 if inlist(distnm, "Claiborne Co", "Clarksdale",  ///   
+	"Cleveland", "Coahoma Co Ahs", "Coahoma County", "Greenville") | 		 ///   
+	inlist(distnm, "Greenwood", "Hollandale", "Humphreys Co", "Indianola", 	 ///   
+	"Leflore Co", "Leland", "North Bolivar", "Quitman") | inlist(distnm, 	 ///   
+	"Quitman Co", "South Delta", "Sunflower Co", "Tunica County", 			 ///   
+	"Vicksburg Warren") | inlist(distnm, "West Bolivar", "West Tallahatchie", ///   
+	"Western Line", "Yazoo", "Yazoo Co")
+
+	qui: replace region = 3 if inlist(distnm, "Aberdeen", "Alcorn", "Amory", ///   
+	"Baldwyn", "Benton Co", "Booneville", "Calhoun Co") | inlist(distnm, 	 ///   
+	"Chickasaw Co", "Clay Co", "Coffeeville", "Corinth", "Desoto Co", 		 ///   
+	"East Tallahatchie", "Grenada", "Holly Springs") | inlist(distnm, 		 ///   
+	"Houston", "Itawamba Co", "Lafayette Co", "Lee County", "Marshall Co", 	 ///   
+	"Monroe Co", "Nettleton") | inlist(distnm, "New Albany", "North Panola", ///   
+	"North Tippah", "Okolona", "Oxford") | inlist(distnm, "Pontotoc", 		 ///   
+	"Pontotoc Co", "Prentiss Co", "Senatobia", "South Panola", "South Tippah", ///
+	"Tate Co") | inlist(distnm, "Tishomingo Co", "Tupelo", "Union", 		 ///   
+	"Water Valley", "Webster Co", "West Point")
+
+	qui: replace region = 4 if inlist(distnm, "Amite Co",					 ///   
+	"Bay St Louis Waveland", "Biloxi", "Brookhaven", "Choctaw Co", "Columbia", ///   
+	"Copiah Co") | inlist(distnm, "Covington Co", "Forrest County", 		 ///   
+	"Forrest County Ahs", "Franklin Co", "George Co", "Greene County", 		 ///   
+	"Gulfport") | inlist(distnm, "Hancock Co", "Harrison Co", "Hattiesburg", ///   
+	"Hazlehurst", "Jackson Co", "Jefferson Co", "Jefferson Davis Co") | 	 ///   
+	inlist(distnm, "Jones Co", "Lamar County", "Laurel", "Lawrence Co", 	 ///   
+	"Lincoln Co", "Long Beach", "Lumberton") | inlist(distnm, "Marion Co",   ///   
+	"Mccomb", "Moss Point", "Natchez-Adams", "North Pike", "Ocean Springs",  ///   
+	"Pascagoula") | inlist(distnm, "Pass Christian", "Pearl River Co",  	 ///   
+	"Perry Co", "Petal", "Picayune", "Poplarville") | inlist(distnm, 		 ///   
+	"Richton", "South Pike", "Stone Co", "Walthall Co", "Wayne Co", 		 ///   
+	"Wilkinson Co")
+	
+	// Define a value label for the variable
+	la var region "Region within the State where district is located"
+	
+	// Define value labels
+	la def region 1 "Central MS" 2 "MS Delta" 3 "Northern MS" 4 "Southern MS"
+	
+	// Apply value labels
+	la val region region
+	
+// End of subroutine
+end
+	
+		

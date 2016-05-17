@@ -1,4 +1,8 @@
 *.xlsx
 *.xls
 exdata/*
+*.json
+dynamicex1/*
+*.key
+
 
