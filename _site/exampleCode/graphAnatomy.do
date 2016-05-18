@@ -3,9 +3,10 @@ in Stata graphs. */
 
 // Create a single data point and a single x,y coordinate pair
 clear
-set obs 1
+set obs 2
 qui: g x = 0.5
 qui: g y = 0.5
+qui: g byte group = _n
 
 // Shows all of the major text options
 tw scatter y x, scheme(sdp2016a) mc(white) ti("This is the main title")		 ///   
