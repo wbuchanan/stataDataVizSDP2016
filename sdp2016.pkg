@@ -11,7 +11,7 @@ d KW: Stata
 d
 d Requires: Stata version 13
 d
-d Distribution-Date: 20160516
+d Distribution-Date: 20160518
 d
 d Author: Billy Buchanan 
 d		  Data Scientist
@@ -28,9 +28,16 @@ f distrograph.ado
 f distrograph.sthlp
 f schsim.ado
 f schsim.sthlp
+f dynamicPage1.mata
 f exampleCode/anscombesQuartet.do
-f exampleCode/brewschemeExamples.do
-f exampleCode/marginsplotExample.do
 f exampleCode/brewmetaView.do
-f exampleCode/itemResponses.do
+f exampleCode/brewschemeExamples.do
 f exampleCode/extendingCommands.do
+f exampleCode/graphAnatomy.do
+f exampleCode/graphOptions.do
+f exampleCode/itemResponses.do
+f exampleCode/marginsplotExample.do
+f exampleCode/nestedDistributions.do
+f exampleCode/otherGraphExamples.do
+f exampleCode/semiDynamic.do
+f exampleCode/tradeOffsIllustration.do

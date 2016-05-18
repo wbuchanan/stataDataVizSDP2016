@@ -6,55 +6,58 @@ altc(0.075 -1.5) hq(0.95 0.001) frl(0.65 -4.5) chart(0.085 0.75) 			 ///
 sch(1 15) educ(10 35) stud(18 34) yea(4) attr(0.2285) time(0 1) 			 ///   
 scheff(0 1) edeff(0 5) steff(0 10) seed(7779311) 
 
-// Retain only a few variables
-keep stdid schyr tchid schid distid testscore proflevel race sex sped ell 	 ///   
-frl nce
+// Retain the data in memory
+preserve
 
-// Reshape the data into wide/multivariate format
-reshape wide testscore nce proflevel, i(distid schid tchid stdid) j(schyr)
+	// Retain only a few variables
+	keep stdid schyr tchid schid distid testscore proflevel race sex sped ell 	 ///   
+	frl nce
 
-// Need to create time indicators
-forv i = 2006/2009 {
+	// Reshape the data into wide/multivariate format
+	reshape wide testscore nce proflevel, i(distid schid tchid stdid) j(schyr)
 
-	// Creates a school year variable
-	qui: g int x`i' = `i'
-	
-} // End Loop 
+	// Need to create time indicators
+	forv i = 2006/2009 {
 
-// Stores if condition for graphs
-loc ifc distid == 1 & schid == 1 
+		// Creates a school year variable
+		qui: g int x`i' = `i'
+		
+	} // End Loop 
 
-// Creates a parallel coordinates (paired coordinates in Stata vernacular) 
-// plot of student test scores
-tw pcspike testscore2006 x2006 testscore2007 x2007 if `ifc',				 ///   
-by(tchid, ti("Test Score Changes From 2006 to 2007") 						 ///   
-note("Panels by Classroom")) xlab(#2) xsca(range(2006(1)2007)) 				 ///   
-xti("School Year") scheme(sdp2016b2) yti("Test Scores")
+	// Stores if condition for graphs
+	loc ifc distid == 1 & schid == 1 
 
-// Save the example
-gr export exampleGraphs/parallelCoordinates1.pdf, as(pdf) replace
+	// Creates a parallel coordinates (paired coordinates in Stata vernacular) 
+	// plot of student test scores
+	tw pcspike testscore2006 x2006 testscore2007 x2007 if `ifc',				 ///   
+	by(tchid, ti("Test Score Changes From 2006 to 2007") 						 ///   
+	note("Panels by Classroom")) xlab(#2) xsca(range(2006(1)2007)) 				 ///   
+	xti("School Year") scheme(sdp2016b2) yti("Test Scores")
 
-// Now create the parallel coordinates plot
-tw pcspike testscore2006 x2006 testscore2007 x2007 if `ifc' || 				 ///   
-pcspike testscore2007 x2007 testscore2008 x2008 if `ifc'  || 				 ///   
-pcspike testscore2008 x2008 testscore2009 x2009 if `ifc', 					 ///   
-scheme(sdp2016a) xti("School Year") yti("Test Scores") 						 ///   
-ti("Student Test Scores Over Time") 
+	// Save the example
+	gr export exampleGraphs/parallelCoordinates1.pdf, as(pdf) replace
 
-// Save the example
-gr export exampleGraphs/parallelCoordinates2.pdf, as(pdf) replace
+	// Now create the parallel coordinates plot
+	tw pcspike testscore2006 x2006 testscore2007 x2007 if `ifc' || 				 ///   
+	pcspike testscore2007 x2007 testscore2008 x2008 if `ifc'  || 				 ///   
+	pcspike testscore2008 x2008 testscore2009 x2009 if `ifc', 					 ///   
+	scheme(sdp2016a) xti("School Year") yti("Test Scores") 						 ///   
+	ti("Student Test Scores Over Time") 
 
-// Almost same type of graph, but not as usefull if there are too many observations
-xtset stdid schyr
+	// Save the example
+	gr export exampleGraphs/parallelCoordinates2.pdf, as(pdf) replace
 
-// Looks like a spaghetti monster attacked your screen
-xtline testscore if distid == 1 & schid == 1, ov legend(off) scheme(sdp2016a2)
+	// Almost same type of graph, but not as usefull if there are too many observations
+	xtset stdid schyr
 
-// Save the example
-gr export exampleGraphs/parallelCoordinates3.pdf, as(pdf) replace
+	// Looks like a spaghetti monster attacked your screen
+	xtline testscore if distid == 1 & schid == 1, ov legend(off) scheme(sdp2016a2)
+
+	// Save the example
+	gr export exampleGraphs/parallelCoordinates3.pdf, as(pdf) replace
 
 // Can be useful for aggregates
-preserve
+restore, preserve
 
 	// Retain just a bit of the data
 	keep distid schid tchid clsavg schyr
