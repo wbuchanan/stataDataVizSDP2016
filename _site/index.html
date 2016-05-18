@@ -1,0 +1,242 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Statadatavizsdp2016 by wbuchanan</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-light.css">
+    <meta name="viewport" content="width=device-width">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Statadatavizsdp2016</h1>
+        <p>Repository for Becoming a Better Data Communicator: Stata Data Visualization session at the 2016 Beyond the Numbers Convening</p>
+
+        <p class="view"><a href="https://github.com/wbuchanan/stataDataVizSDP2016">View the Project on GitHub <small>wbuchanan/stataDataVizSDP2016</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/wbuchanan/stataDataVizSDP2016/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/wbuchanan/stataDataVizSDP2016/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/wbuchanan/stataDataVizSDP2016">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a id="becoming-a-better-data-communicator-stata-data-visualization" class="anchor" href="#becoming-a-better-data-communicator-stata-data-visualization" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Becoming a Better Data Communicator: Stata Data Visualization</h1>
+
+<p>This repository contains materials for the <em>Becoming a Better Data Communicator: Stata Data Visualization</em> session at the <a href="http://sdp.cepr.harvard.edu/event/beyond-numbers-convening">Strategic Data Project's 2016 Spring Convening</a>.  Additionally, if there are resources you think others may find helpful, please feel free to share them here as well via <code>pull</code> requests.  </p>
+
+<h1>
+<a id="getting-the-resources-locally" class="anchor" href="#getting-the-resources-locally" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Getting the resources locally</h1>
+
+<p>In addition to the Stata package installer that would allow you to install all of the Stata example scripts and programs created for this session, you can also use <a href="http://www.git-scm.com">Git</a> to create a copy of all the materials here to your computer.  </p>
+
+<p>In addition to getting all of the other files (e.g., the .pdfs, etc...) using <a href="http://git-scm.com">Git</a> has significant advantages.  For example, if you're using any *nix-based system you can copy all of the material by opening a terminal (Terminal.app for OSX users) and entering :</p>
+
+<pre><code>cd  ~/Desktop &amp;&amp; git clone https://github.com/wbuchanan/stataDataVizSDP2016.git
+</code></pre>
+
+<p>Or if you're using another operating system, open the GitBash application and enter:</p>
+
+<pre><code>cd /c/Users/username/Desktop
+git clone https://github.com/wbuchanan/stataDataVizSDP2016.git
+</code></pre>
+
+<p>If there are ever any changes in the future (e.g., examples added afterwards based on your feedback) you can update everything with:</p>
+
+<pre><code>cd ~/Desktop/stataDataVizSDP2016 &amp;&amp; git pull
+</code></pre>
+
+<h1>
+<a id="prereadings" class="anchor" href="#prereadings" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Prereadings</h1>
+
+<p><a href="http://wbuchanan.github.io/brewscheme/brewscheme.pdf">brewscheme</a> </p>
+
+<h2>
+<a id="optional" class="anchor" href="#optional" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Optional</h2>
+
+<p>This is an excellent and condensed review of the literature related to data visualization.  It's a quick/easy read that is definitely worth the time if you have a few minutes to kill.  <em>Note: although the title mentions 30 minutes, that was a reference to the talk from which the blog post was derived not the amount of time it would take to read the post.</em>
+<a href="https://medium.com/@kennelliott/39-studies-about-human-perception-in-30-minutes-4728f9e31a73#.e7q4hqv13">39 studies about human perception in 30 minutes</a></p>
+
+<h1>
+<a id="prework" class="anchor" href="#prework" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Prework</h1>
+
+<p>Prior to attending the session, participants should install the <code>brewscheme</code> package; the <code>jsonio</code> package is optional, but will be useful if you ever need to work with JSON data or are interested in using <a href="https://www.d3js.org">D3js</a> from Stata.  To make sure you have the most recent version of the program you can install it using (<em>Note, this program does require Stata 13 or later.</em>):</p>
+
+<div class="highlight highlight-source-stata"><pre>net install brewscheme, from(<span class="pl-s"><span class="pl-pds">"</span>http://wbuchanan.github.io/brewscheme/<span class="pl-pds">"</span></span>)</pre></div>
+
+<h1>
+<a id="other-helpfuluseful-visualization-packages" class="anchor" href="#other-helpfuluseful-visualization-packages" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Other helpful/useful visualization packages</h1>
+
+<p>If you are also interested in developing web-based data visualizations and/or integrating <a href="https://d3js.org">D3.js</a> into your work flow you should also install the programs below:  </p>
+
+<h2>
+<a id="jsonio" class="anchor" href="#jsonio" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>jsonio</h2>
+
+<p>This program provides Input/Output functions for working with JSON data Unlike saving a CSV file, the serializer will also include your variable labels, value labels, and other metadata related to the data set in the JSON file itself.  This makes it easier to write more flexible code since you won't need to hardcode the meta data into the source code. It also flattens arbitrarily complex JSON structures so you can load any JSON file as either a two column data set (key-value) or as a single record (e.g., row-value).</p>
+
+<div class="highlight highlight-source-stata"><pre>net install jsonio, from(<span class="pl-s"><span class="pl-pds">"</span>http://wbuchanan.github.io/StataJSON/<span class="pl-pds">"</span></span>)</pre></div>
+
+<h2>
+<a id="libhtml" class="anchor" href="#libhtml" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>libhtml</h2>
+
+<p>This package has a single .ado file called libhtml that downloads and compiles all of the Mata source code into a Mata library for you.  Then you can create HTML elements within Stata.  To place content between the tags, each HTML object has a method called setClassArgs() that handles inserting the content for you.</p>
+
+<div class="highlight highlight-source-stata"><pre>net install libhtml, from(<span class="pl-s"><span class="pl-pds">"</span>http://wbuchanan.github.io/matahtml/<span class="pl-pds">"</span></span>)</pre></div>
+
+<h2>
+<a id="libd3" class="anchor" href="#libd3" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>libd3</h2>
+
+<p>This is the package that you're probably most interested in.  It is a Mata wrapper around the D3.js library.  With few exceptions it mirrors the D3 library as exactly as possible, but also includes some "syntactic sugar" to make it easier for you you to do things like insert text, numbers, or references to other javascript variables; the other notable exception is that all functions in the D3js library must be followed with parentheses:</p>
+
+<div class="highlight highlight-source-stata"><pre><span class="pl-c">// Start Mata interpreter</span>
+mata:<span class="pl-s1"></span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-c">// Create a d3 object</span></span>
+<span class="pl-s1">d <span class="pl-k">=</span> d3()</span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-c">// Initialize the object with a JS variable name.  </span></span>
+<span class="pl-s1"><span class="pl-c">// Equivalent of - var myvar = d3.</span></span>
+<span class="pl-s1">d.init(<span class="pl-s"><span class="pl-pds">"</span>myvar<span class="pl-pds">"</span></span>)</span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-c">// This would fail because .svg is a reference to a member of a class and would </span></span>
+<span class="pl-s1"><span class="pl-c">// not call a self referencing function</span></span>
+<span class="pl-s1">d.svg.axis()</span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-c">// This would work:</span></span>
+<span class="pl-s1"><span class="pl-c">// d.svg.axis()</span></span>
+<span class="pl-s1">d.svg().axis()</span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-c">// To reference a JavaScript variable use:</span></span>
+<span class="pl-s1"><span class="pl-c">// d3.svg.axis(existingVar)</span></span>
+<span class="pl-s1">d.svg().axis(<span class="pl-s"><span class="pl-pds">"</span>obj_existingVar<span class="pl-pds">"</span></span>)</span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-c">// There is also a method to enter arbitrary javascript code:</span></span>
+<span class="pl-s1"><span class="pl-c">// svg.select('p').enter().data()</span></span>
+<span class="pl-s1">d.init().jsfree(<span class="pl-s"><span class="pl-pds">"</span>svg.select('p').enter().data()<span class="pl-pds">"</span></span>)</span></pre></div>
+
+<p>For additional information about the <a href="https://wbuchanan.github.io/d3mata">libd3</a> package, you should check the package repository and/or project page.</p>
+
+<div class="highlight highlight-source-stata"><pre>net inst libd3, from(<span class="pl-s"><span class="pl-pds">"</span>http://wbuchanan.github.io/d3mata<span class="pl-pds">"</span></span>)</pre></div>
+
+<h1>
+<a id="workshop-package" class="anchor" href="#workshop-package" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Workshop package</h1>
+
+<div class="highlight highlight-source-stata"><pre>net from <span class="pl-s"><span class="pl-pds">"</span>http://wbuchanan.github.io/stataDataVizSDP2016/<span class="pl-pds">"</span></span>
+net inst sdp2016, replace
+
+<span class="pl-c">// This will put the .do files in your current working directory</span>
+net get sdp2016, replace
+
+<span class="pl-c">// If you want to save the example scripts somewhere else on your computer use:</span>
+net set other <span class="pl-s"><span class="pl-pds">"</span>C:/Users/username/Desktop/whereToSaveScripts<span class="pl-pds">"</span></span>
+
+<span class="pl-c">// Now the ancillary files (e.g., .do file scripts) will be saved where you wanted</span>
+net get sdp2016, replace</pre></div>
+
+<h2>
+<a id="msasado-examples" class="anchor" href="#msasado-examples" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>msas.ado Examples</h2>
+
+<p>You can view similar examples and additional details about this convenience program using:</p>
+
+<div class="highlight highlight-source-stata"><pre>help msas
+
+<span class="pl-c">// OR </span>
+
+h msas
+
+<span class="pl-c">// Download the data and save copies of the performance and participation data to disk</span>
+msas, perf(exdata/performance.dta) partic(exdata/participation.dta) dlf(msas.xlsx)
+
+<span class="pl-c">// Can load the Stata file normally, or you can load it by processing the MS Excel file</span>
+<span class="pl-c">// This would load the performance (e.g., assessment and graduation rate) data</span>
+msas using msas.xlsx, perf
+
+<span class="pl-c">// This would load the participation rate data</span>
+msas using msas.xlsx, partic
+</pre></div>
+
+<h2>
+<a id="irtsimado" class="anchor" href="#irtsimado" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>irtsim.ado</h2>
+
+<p>The workshop package also includes a small/simple simulation tool to simulate item responses to illustrate some of the visualizations used with IRT.  To view the help file.  The example below would simulate 9 items for 5000 observations using a Rasch model (_The Rasch model is a special case of the 1PL model where the discrimination parameter is constrained to a value of 1)</p>
+
+<div class="highlight highlight-source-stata"><pre>help irtsim
+
+<span class="pl-c">// OR </span>
+
+h irtsim
+
+<span class="pl-c">// Simulate responses on items with difficulties of -2, -1.5, -1, -0.5, 0, .5, </span>
+<span class="pl-c">// 1, 1.5, and 2 for 5000 examinees with an average ability of 0 and SD of 1.5</span>
+irtsim, th(0 1.5) nob(5000) discrim(1) diff(<span class="pl-k">-</span>2(0.5)2) scalef(1) pseudog(0)</pre></div>
+
+<p>If you are interested in IRT, there is also some work that I started a while ago to integrate <a href="http://www.itemanalysis.com">jMetrik</a> in Stata and can be used in Stata 13; <em>currently only the Joint Maximum Likelihood Estimator for a Rasch Model is supported, but it does provide In-Fit and Out-Fit statistics</em>.</p>
+
+<h2>
+<a id="schsimado" class="anchor" href="#schsimado" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>schsim.ado</h2>
+
+<p>In order to have some data that could be used for nested subjects, there is also a simulation tool that generates data for "students" nested within classrooms, schools, and districts.  For sample sizes, you tell the program the minimum and maximum number of units to sample, and for effects you specify the mean and standard deviation (there is an assumption that all the random effects are normally distributed and the effect for time is treated independently of all other sampling units).  There are also places where you can specify the proportion of observations with specific characteristics (e.g., charter schools within district, whether teachers have masters degrees, were late hires, ethnoracial characteristics of students, EL/Disability/FRL status, etc...) and the coefficient for each of those characteristics.  </p>
+
+<p>Additionally, the simulation also creates different class, school, and district level aggregates and also imposes some cross-classified effects (i.e., a district level effect for the % of teachers with a masters degree or higher).  </p>
+
+<div class="highlight highlight-source-stata"><pre>help schsim
+
+<span class="pl-c">// OR </span>
+
+h schsim
+
+<span class="pl-c">// Simulate data for test scores of students nested in classes, schools, and</span>
+<span class="pl-c">// districts</span>
+schsim, avgsc(100 15) dist(3) disteff(0 .15) asi(0.065 7) bl(0.375 <span class="pl-k">-</span>7.5)     <span class="pl-c">///   </span>
+hisp(0.2 <span class="pl-k">-</span>5.25) natam(0.03 <span class="pl-k">-</span>9.5) white(0.33 4.75) sex(0.51 3.75)             <span class="pl-c">///   </span>
+sp(0.11 <span class="pl-k">-</span>14.5) el(0.175 <span class="pl-k">-</span>8.5) mast(0.8 0.0125) lateh(0.225 <span class="pl-k">-</span>2.5)             <span class="pl-c">///   </span>
+altc(0.075 <span class="pl-k">-</span>1.5) hq(0.95 0.001) frl(0.65 <span class="pl-k">-</span>4.5) chart(0.085 0.75)             <span class="pl-c">///   </span>
+sch(1 15) educ(10 35) stud(18 34) yea(4) attr(0.2285) time(0 1)              <span class="pl-c">///   </span>
+scheff(0 1) edeff(0 5) steff(0 10) seed(7779311) </pre></div>
+
+<h1>
+<a id="participant-driven-programsexamples" class="anchor" href="#participant-driven-programsexamples" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Participant driven programs/examples</h1>
+
+<h2>
+<a id="distrographado" class="anchor" href="#distrographado" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>distrograph.ado</h2>
+
+<p>This is essentially a wrapper around the histogram command.  The difference is  a single option <code>reflines</code> that accepts a number list.  The numbers passed to this parameter are used to create reference lines based on standard deviations from the mean.</p>
+
+<div class="highlight highlight-source-stata"><pre>help distrograph
+
+<span class="pl-c">// OR </span>
+
+h distrograph
+
+<span class="pl-c">// Load the performance data</span>
+msas using msas.xlsx, perf
+
+<span class="pl-c">// Create a distribution plot of graduation rates with the references mentioned </span>
+<span class="pl-c">// in the request above:</span>
+distrograph gradrate if schnm <span class="pl-k">!</span><span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>District Level<span class="pl-pds">"</span></span>, reflin(<span class="pl-k">-</span>2 <span class="pl-k">-</span>1 1 2)
+
+<span class="pl-c">// Like the other graphs, we can also pass a scheme file to the command</span>
+distrograph gradrate if schnm <span class="pl-k">!</span><span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>District Level<span class="pl-pds">"</span></span>, reflin(<span class="pl-k">-</span>2 <span class="pl-k">-</span>1 1 2) scheme(sdp2016a)</pre></div>
+
+<h2>
+<a id="semidynamicdo" class="anchor" href="#semidynamicdo" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>semiDynamic.do</h2>
+
+<p>Wasn't able to get the .ado wrapper working, but this .do file generates a series of district specific scatterplots of reading proficiency vs reading growth of the low 25% students of the schools within it.  It uses the code in dynamicPage1.mata to then generate an HTML page that allows you to select a district to view the graph.  </p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/wbuchanan">wbuchanan</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
