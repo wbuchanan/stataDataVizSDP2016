@@ -23,8 +23,12 @@ If there are ever any changes in the future (e.g., examples added afterwards bas
 cd ~/Desktop/stataDataVizSDP2016 && git pull
 ```
 
-# Prereadings
+# Pre-Session Reading
 [brewscheme](http://wbuchanan.github.io/brewscheme/brewscheme.pdf) 
+
+# Additional resources
+In conversations with a few friends from Cohort 5, I thought there might be some other resources that I could reference that might be useful to others.  In one of these conversations we started discussing some of the issues with alpha transparency and issues with the underlying algorithms used to implement the perceived transparency that rely on layer order.  This grew out of a talk from [Aneesh Karve at the 2016 Strata + Hadoop World Conference](http://www.visualmagnetic.com/portfolio/visualization-is-distortion/); to get to this part of the discussion you can move to 5:30 in the video.  This presentation ended up being based quite heavily on the work of [Kindlmann, G., & Scheidegger, C. (2014).  An Algebraic Process for Visualization Design.  IEEE Transactions on Visualization and Computer Graphics.](https://www.researchgate.net/profile/Gordon_Kindlmann/publication/265470662_An_Algebraic_Process_for_Visualization_Design/links/541030e10cf2df04e75b7707.pdf).  These two resource provide a really helpful framework for thinking about issues in data visualization, codifying said issues based on the type of effect it has for the user of the visualization, and ultimately providing a framework that we can use to evaluate, refine, and improve existing visualizations.
+
 
 ## Optional
 This is an excellent and condensed review of the literature related to data visualization.  It's a quick/easy read that is definitely worth the time if you have a few minutes to kill.  _Note: although the title mentions 30 minutes, that was a reference to the talk from which the blog post was derived not the amount of time it would take to read the post._
